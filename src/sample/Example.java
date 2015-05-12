@@ -14,7 +14,6 @@ public class Example {
 
     /**
      * Sets the example as long as what is passed in is not null
-     *
      * @param ex New example to be stored
      */
     public void setExample(String ex) {
