@@ -738,27 +738,35 @@ public class Controller {
         newExample.put(newMeaning, examples);
         words.put(word.getText(), newExample);
         query = "UPDATE word SET ";
-        if (partOfSpeech.equals("noun_en")) {
-            handleNounEditButton(event);
-            query += "nno=nno+1 WHERE windex=" + index;
-        } else if (partOfSpeech.equals("verb_en")) {
-            handleVerbEditButton(event);
-            query += "vno=vno+1 WHERE windex=" + index;
-        } else if (partOfSpeech.equals("adj_en")) {
-            handleAdjEditButton(event);
-            query += "adjno=adjno+1 WHERE windex=" + index;
-        } else if (partOfSpeech.equals("adv_en")) {
-            handleAdvEditButton(event);
-            query += "advno=advno+1 WHERE windex=" + index;
-        } else if (partOfSpeech.equals("pro_en")) {
-            handleProEditButton(event);
-            query += "prono=prono+1 WHERE windex=" + index;
-        } else if (partOfSpeech.equals("conj_en")) {
-            handleConjEditButton(event);
-            query += "conjno=conjno+1 WHERE windex=" + index;
-        } else {
-            handlePrepEditButton(event);
-            query += "preno=preno+1 WHERE windex=" + index;
+        switch (partOfSpeech) {
+            case "noun_en":
+                handleNounEditButton(event);
+                query += "nno=nno+1 WHERE windex=" + index;
+                break;
+            case "verb_en":
+                handleVerbEditButton(event);
+                query += "vno=vno+1 WHERE windex=" + index;
+                break;
+            case "adj_en":
+                handleAdjEditButton(event);
+                query += "adjno=adjno+1 WHERE windex=" + index;
+                break;
+            case "adv_en":
+                handleAdvEditButton(event);
+                query += "advno=advno+1 WHERE windex=" + index;
+                break;
+            case "pro_en":
+                handleProEditButton(event);
+                query += "prono=prono+1 WHERE windex=" + index;
+                break;
+            case "conj_en":
+                handleConjEditButton(event);
+                query += "conjno=conjno+1 WHERE windex=" + index;
+                break;
+            default:
+                handlePrepEditButton(event);
+                query += "preno=preno+1 WHERE windex=" + index;
+                break;
         }
         statement.executeUpdate(query);
         displayMeanings.setValue(newMeaning);
@@ -793,27 +801,35 @@ public class Controller {
         words.remove(deleteMeaning);
         query = "UPDATE word SET ";
         words.remove(deleteMeaning);
-        if (partOfSpeech.equals("noun_en")) {
-            handleNounEditButton(event);
-            query += "nno=nno-1 WHERE windex=" + index;
-        } else if (partOfSpeech.equals("verb_en")) {
-            handleVerbEditButton(event);
-            query += "vno=vno-1 WHERE windex=" + index;
-        } else if (partOfSpeech.equals("adj_en")) {
-            handleAdjEditButton(event);
-            query += "adjno=adjno-1 WHERE windex=" + index;
-        } else if (partOfSpeech.equals("adv_en")) {
-            handleAdvEditButton(event);
-            query += "advno=advno-1 WHERE windex=" + index;
-        } else if (partOfSpeech.equals("pro_en")) {
-            handleProEditButton(event);
-            query += "prono=prono-1 WHERE windex=" + index;
-        } else if (partOfSpeech.equals("conj_en")) {
-            handleConjEditButton(event);
-            query += "conjno=conjno-1 WHERE windex=" + index;
-        } else {
-            handlePrepEditButton(event);
-            query += "preno=preno-1 WHERE windex=" + index;
+        switch (partOfSpeech) {
+            case "noun_en":
+                handleNounEditButton(event);
+                query += "nno=nno-1 WHERE windex=" + index;
+                break;
+            case "verb_en":
+                handleVerbEditButton(event);
+                query += "vno=vno-1 WHERE windex=" + index;
+                break;
+            case "adj_en":
+                handleAdjEditButton(event);
+                query += "adjno=adjno-1 WHERE windex=" + index;
+                break;
+            case "adv_en":
+                handleAdvEditButton(event);
+                query += "advno=advno-1 WHERE windex=" + index;
+                break;
+            case "pro_en":
+                handleProEditButton(event);
+                query += "prono=prono-1 WHERE windex=" + index;
+                break;
+            case "conj_en":
+                handleConjEditButton(event);
+                query += "conjno=conjno-1 WHERE windex=" + index;
+                break;
+            default:
+                handlePrepEditButton(event);
+                query += "preno=preno-1 WHERE windex=" + index;
+                break;
         }
         statement.executeUpdate(query);
         displayMeanings.setValue(null);

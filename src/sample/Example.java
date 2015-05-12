@@ -22,6 +22,10 @@ public class Example {
         }
     }
 
+    /**
+     * Gets the examples
+     * @return String representation of the example stored
+     */
     public String getExample() {
         return example.get();
     }
