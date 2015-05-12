@@ -1,0 +1,49 @@
+.root {
+    -fx-background-image: url("background.jpg");
+}
+
+.separator {
+    -fx-background: black;
+}
+
+.button {
+    -fx-font-family: "Tahoma";
+    -fx-font-size: 16pt;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-color: linear-gradient(#61a2b1, #2A5058);
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+
+.button:hover {
+    -fx-background-color: linear-gradient(#2A5058, #61a2b1);
+}
+
+.label {
+    -fx-font-family: "Arial Black";
+    -fx-font-size: 20pt;
+    -fx-text-fill: black;
+}
+
+#title {
+    -fx-font-size: 24pt;
+    -fx-font-family: "Arial Black";
+}
+
+#exitButton {
+    -fx-font-size: 16pt;
+}
+
+#border {
+    -fx-border-color:Black;
+}
+
+#Loaded {
+    -fx-text-fill: firebrick;
+    -fx-font-size: 12pt;
+}
+
+#status {
+    -fx-text-fill: crimson;
+    -fx-font-size: 16pt;
+}

@@ -1,0 +1,137 @@
+<?import javafx.scene.layout.GridPane?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import java.net.URL?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.collections.FXCollections?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.Separator?>
+
+<GridPane fx:controller="sample.Controller" xmlns:fx="http://javafx.com/fxml" alignment="CENTER" styleClass="root">
+    <BorderPane id="border" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2">
+        <center>
+            <Label id="title" text="Word Editor"/>
+        </center>
+        <right>
+            <Button id="exitButton" text="Exit" onAction="#handleExitButton"/>
+        </right>
+    </BorderPane>
+    <GridPane id="border" vgap="10" alignment="CENTER_LEFT" GridPane.columnIndex="0" GridPane.rowIndex="1">
+        <padding>
+            <Insets bottom="20.0" top="20.0" left="20.0" right="20.0" />
+        </padding>
+        <GridPane alignment="CENTER_LEFT" hgap="10" vgap="10" GridPane.columnIndex="0" GridPane.rowIndex="0">
+            <Label text="Enter a word" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+            <HBox spacing="10" alignment="CENTER_LEFT" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                <TextField fx:id="word" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <Button text="Get" onAction="#handleGetButton" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                <Label fx:id="wordStatus" id="status" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            </HBox>
+            <HBox spacing="10" alignment="CENTER_LEFT" GridPane.columnIndex="0" GridPane.rowIndex="2">
+                <Button text="Insert" onAction="#handleInsertButton"/>
+                <Button text="Update" onAction="#handleUpdateButton"/>
+                <Button text="Delete" onAction="#handleDeleteButton"/>
+                <Button text="Previous" onAction="#handlePreviousButton" />
+                <Button text="Next" onAction="#handleNextButton" />
+            </HBox>
+        </GridPane>
+        <Separator orientation="HORIZONTAL" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <GridPane alignment="TOP_LEFT" hgap="40" vgap="30" GridPane.columnIndex="0" GridPane.rowIndex="2">
+            <VBox alignment="CENTER_LEFT" spacing="40" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.rowSpan="7">
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <CheckBox fx:id="Noun"/>
+                    <Label text="Noun" prefWidth="200"/>
+                    <Button fx:id="NounEdit" text="Edit" onAction="#handleNounEditButton" disable="true"/>
+                    <Label fx:id="NounSucc" id="Loaded"/>
+                </HBox>
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <CheckBox fx:id="Verb"/>
+                    <Label text="Verb" prefWidth="200"/>
+                    <Button fx:id="VerbEdit" text="Edit" onAction="#handleVerbEditButton" disable="true"/>
+                    <Label fx:id="VerbSucc" id="Loaded"/>
+                </HBox>
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <CheckBox fx:id="Adjective"/>
+                    <Label text="Adjective" prefWidth="200"/>
+                    <Button fx:id="AdjEdit" text="Edit" onAction="#handleAdjEditButton" disable="true"/>
+                    <Label fx:id="AdjSucc" id="Loaded"/>
+                </HBox>
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <CheckBox fx:id="Adverb"/>
+                    <Label text="Adverb" prefWidth="200"/>
+                    <Button fx:id="AdvEdit" text="Edit" onAction="#handleAdvEditButton" disable="true"/>
+                    <Label fx:id="AdvSucc" id="Loaded"/>
+                </HBox>
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <CheckBox fx:id="Pronoun"/>
+                    <Label text="Pronoun" prefWidth="200"/>
+                    <Button fx:id="ProEdit" text="Edit" onAction="#handleProEditButton" disable="true"/>
+                    <Label fx:id="ProSucc" id="Loaded"/>
+                </HBox>
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <CheckBox fx:id="Conjunction"/>
+                    <Label text="Conjunction" prefWidth="200"/>
+                    <Button fx:id="ConjEdit" text="Edit" onAction="#handleConjEditButton" disable="true"/>
+                    <Label fx:id="ConjSucc" id="Loaded"/>
+                </HBox>
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <CheckBox fx:id="Preposition"/>
+                    <Label text="Preposition" prefWidth="200"/>
+                    <Button fx:id="PrepEdit" text="Edit" onAction="#handlePrepEditButton" disable="true"/>
+                    <Label fx:id="PrepSucc" id="Loaded"/>
+                </HBox>
+            </VBox>
+        </GridPane>
+    </GridPane>
+    <GridPane id="border" vgap="10" GridPane.columnIndex="1" GridPane.rowIndex="1">
+        <padding>
+            <Insets bottom="20.0" top="20.0" left="20.0" right="20.0" />
+        </padding>
+        <GridPane alignment="TOP_LEFT" vgap="10" hgap="10" GridPane.columnIndex="0" GridPane.rowIndex="0">
+            <HBox spacing="10" alignment="CENTER_LEFT" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                <ComboBox fx:id="Language" promptText="Choose a language" onAction="#handleLanguageOption">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="English"/>
+                            <String fx:value="Chinese"/>
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+                <TextField fx:id="Level" />
+                <Button fx:id="SubmitLevelButton" text="Submit" onAction="#handleEnterLevel" disable="true"/>
+            </HBox>
+            <Label fx:id="LevelStatus" id="status" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <Separator orientation="HORIZONTAL" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+            <ComboBox fx:id="displayMeanings" GridPane.columnIndex="0" GridPane.rowIndex="3" prefWidth="500"
+                      promptText="Select a meaning:" onAction="#handleMeaningOption" />
+            <TableView fx:id="TableExamples" GridPane.columnIndex="0" GridPane.rowIndex="4">
+                <columns>
+                    <TableColumn fx:id="Examples" text="Examples" prefWidth="500" onEditCommit="#handleEdit"/>
+                </columns>
+            </TableView>
+        </GridPane>
+        <Separator orientation="HORIZONTAL" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <GridPane alignment="TOP_LEFT" hgap="10" vgap="10" GridPane.columnIndex="0" GridPane.rowIndex="2">
+            <Label text="Edit Meaning" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+            <HBox spacing="10" alignment="CENTER_LEFT" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                <TextField fx:id="EditMeaning"/>
+                <Button fx:id="InsertButton" text="Insert" onAction="#handleInsertMeaning" disable="true" />
+                <Button fx:id="DeleteButton" text="Delete" onAction="#handleDeleteMeaning" disable="true" />
+            </HBox>
+            <Label fx:id="MeaningStatus" id="status" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+        </GridPane>
+    </GridPane>
+    <stylesheets>
+        <URL value="@Design.css"/>
+    </stylesheets>
+</GridPane>
