@@ -1,6 +1,7 @@
 package sample;
 
-import javafx.animation.*;
+import javafx.animation.FadeTransition;
+import javafx.animation.SequentialTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,58 +18,94 @@ import java.util.HashMap;
 import static java.lang.System.exit;
 
 public class Controller {
-    @FXML private TextField word;
+    @FXML
+    private TextField word;
 
-    @FXML private Label wordStatus;
+    @FXML
+    private Label wordStatus;
 
-    @FXML private CheckBox Noun;
-    @FXML private CheckBox Verb;
-    @FXML private CheckBox Adjective;
-    @FXML private CheckBox Adverb;
-    @FXML private CheckBox Pronoun;
-    @FXML private CheckBox Conjunction;
-    @FXML private CheckBox Preposition;
+    @FXML
+    private CheckBox Noun;
+    @FXML
+    private CheckBox Verb;
+    @FXML
+    private CheckBox Adjective;
+    @FXML
+    private CheckBox Adverb;
+    @FXML
+    private CheckBox Pronoun;
+    @FXML
+    private CheckBox Conjunction;
+    @FXML
+    private CheckBox Preposition;
 
-    @FXML private Button NounEdit;
-    @FXML private Button VerbEdit;
-    @FXML private Button AdjEdit;
-    @FXML private Button AdvEdit;
-    @FXML private Button ProEdit;
-    @FXML private Button ConjEdit;
-    @FXML private Button PrepEdit;
+    @FXML
+    private Button NounEdit;
+    @FXML
+    private Button VerbEdit;
+    @FXML
+    private Button AdjEdit;
+    @FXML
+    private Button AdvEdit;
+    @FXML
+    private Button ProEdit;
+    @FXML
+    private Button ConjEdit;
+    @FXML
+    private Button PrepEdit;
 
-    @FXML private Label NounSucc;
-    @FXML private Label VerbSucc;
-    @FXML private Label AdjSucc;
-    @FXML private Label AdvSucc;
-    @FXML private Label ProSucc;
-    @FXML private Label ConjSucc;
-    @FXML private Label PrepSucc;
+    @FXML
+    private Label NounSucc;
+    @FXML
+    private Label VerbSucc;
+    @FXML
+    private Label AdjSucc;
+    @FXML
+    private Label AdvSucc;
+    @FXML
+    private Label ProSucc;
+    @FXML
+    private Label ConjSucc;
+    @FXML
+    private Label PrepSucc;
 
-    @FXML private ComboBox displayMeanings;
+    @FXML
+    private ComboBox displayMeanings;
 
-    @FXML private ComboBox Language;
-    @FXML private TextField Level;
-    @FXML private Button SubmitLevelButton;
-    @FXML private Label LevelStatus;
+    @FXML
+    private ComboBox Language;
+    @FXML
+    private TextField Level;
+    @FXML
+    private Button SubmitLevelButton;
+    @FXML
+    private Label LevelStatus;
 
-    @FXML private TableView TableExamples;
-    @FXML private TableColumn Examples;
+    @FXML
+    private TableView TableExamples;
+    @FXML
+    private TableColumn Examples;
 
-    @FXML private TextField EditMeaning;
+    @FXML
+    private TextField EditMeaning;
 
-    @FXML private Button InsertButton;
-    @FXML private Button DeleteButton;
-    @FXML private Label MeaningStatus;
+    @FXML
+    private Button InsertButton;
+    @FXML
+    private Button DeleteButton;
+    @FXML
+    private Button UpdateButton;
+    @FXML
+    private Label MeaningStatus;
 
     private static String partOfSpeech = null;
     private static int index;
 
     private HashMap<String, HashMap<String, Example[]>> words;
     // Local Database - Unfortunately it is hardcoded now, but it will be set later.
-    private final static String DB_URL = null; //In the form: jdbc:mysql://localhost/DB_NAME
-    private final static String USER = null;
-    private final static String PASS = null;
+    private final static String DB_URL = "jdbc:mysql://localhost:3306/userinfo";
+    private final static String USER = "root";
+    private final static String PASS = "tBttPAtI20YA";
 
     private static Statement statement;
 
@@ -133,6 +170,7 @@ public class Controller {
         EditMeaning.setText(null);
         InsertButton.setDisable(true);
         DeleteButton.setDisable(true);
+        UpdateButton.setDisable(true);
         Level.setText(null);
         SubmitLevelButton.setDisable(true);
     }
@@ -171,7 +209,7 @@ public class Controller {
      * Set' if it is set as null. Otherwise, displays the level for English
      * on the TextField
      *
-     * @param word Word selected
+     * @param word     Word selected
      * @param language The language chosen (English or Chinese)
      * @throws SQLException is thrown if the statement is invalid
      */
@@ -532,6 +570,7 @@ public class Controller {
         SubmitLevelButton.setDisable(false);
         InsertButton.setDisable(false);
         DeleteButton.setDisable(false);
+        UpdateButton.setDisable(false);
         displayMeanings.setPromptText("Select a meaning: ");
     }
 
@@ -909,8 +948,7 @@ public class Controller {
             words.get(word.getText()).get(displayMeanings.getValue())[0].setExample(event.getNewValue());
             query += "example1=\"" + event.getNewValue() + "\" WHERE meaning='" + displayMeanings.getValue() + "' && nindex=" + index;
             TableExamples.getSelectionModel().selectBelowCell();
-        }
-        else if (i == 1) {
+        } else if (i == 1) {
             words.get(word.getText()).get(displayMeanings.getValue())[1].setExample(event.getNewValue());
             query += "example2=\"" + event.getNewValue() + "\" WHERE meaning='" + displayMeanings.getValue() + "' && nindex=" + index;
             TableExamples.getSelectionModel().selectBelowCell();
@@ -919,5 +957,40 @@ public class Controller {
             query += "example3=\"" + event.getNewValue() + "\" WHERE meaning='" + displayMeanings.getValue() + "' && nindex=" + index;
         }
         statement.executeUpdate(query);
+    }
+
+    /**
+     * Updates the meaning for the selected word's part of speech
+     * @param actionEvent Event
+     * @throws SQLException Thrown with issue with query
+     */
+    public void handleUpdateMeaning(ActionEvent actionEvent) throws SQLException {
+        String query = "UPDATE " + partOfSpeech + " SET meaning=\"" + EditMeaning.getText() + "\" WHERE nindex=" + index;
+        statement.executeUpdate(query);
+        /*
+        switch (partOfSpeech) {
+            case "noun_en":
+                handleNounEditButton(actionEvent);
+                break;
+            case "verb_en":
+                handleVerbEditButton(actionEvent);
+                break;
+            case "adj_en":
+                handleAdjEditButton(actionEvent);
+                break;
+            case "adv_en":
+                handleAdvEditButton(actionEvent);
+                break;
+            case "pro_en":
+                handleProEditButton(actionEvent);
+                break;
+            case "conj_en":
+                handleConjEditButton(actionEvent);
+                break;
+            case "prep_en":
+                handlePrepEditButton(actionEvent);
+                break;
+        }
+        */
     }
 }

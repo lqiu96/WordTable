@@ -127,6 +127,7 @@
                 <TextField fx:id="EditMeaning"/>
                 <Button fx:id="InsertButton" text="Insert" onAction="#handleInsertMeaning" disable="true" />
                 <Button fx:id="DeleteButton" text="Delete" onAction="#handleDeleteMeaning" disable="true" />
+                <Button fx:id="UpdateButton" text="Update" onAction="#handleUpdateMeaning" disable="true" />
             </HBox>
             <Label fx:id="MeaningStatus" id="status" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
         </GridPane>

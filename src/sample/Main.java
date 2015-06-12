@@ -7,13 +7,13 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-    
+
     @Override
     public void start(Stage primaryStage) throws Exception{
         primaryStage.setTitle("Word Editor");
 
-        Parent login = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        primaryStage.setScene(new Scene(login));
+        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
 
