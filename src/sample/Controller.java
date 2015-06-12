@@ -103,9 +103,9 @@ public class Controller {
 
     private HashMap<String, HashMap<String, Example[]>> words;
     // Local Database - Unfortunately it is hardcoded now, but it will be set later.
-    private final static String DB_URL = "jdbc:mysql://localhost:3306/userinfo";
-    private final static String USER = "root";
-    private final static String PASS = "tBttPAtI20YA";
+    private final static String DB_URL = "";
+    private final static String USER = "";
+    private final static String PASS = "";
 
     private static Statement statement;
 
